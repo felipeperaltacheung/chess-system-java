@@ -1,15 +1,17 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.List;
+import boardgame.Position;
 
 public class Program {
 
 	public static void main(String[] args) {
-		List<Integer> n = new ArrayList<>();
-		n.add(st);
-		System.out.println(n);
-
+		
+		Position pos = new Position(3, 5);
+		System.out.println(pos);
+		
 	}
 
 }
+
+
+//https://github.com/acenelio/chess-system-design
