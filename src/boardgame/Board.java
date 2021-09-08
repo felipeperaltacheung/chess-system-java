@@ -28,5 +28,12 @@ public class Board {
 		this.columns = columns;
 	}
 	
+	public Piece piece(int row, int column) {
+		return pieces[row][column]; //metodo para retornar a matriz pieces na row e column...
+	}
+	
+	public Piece piece(Position position) {  // perceba a "SOBRECARGA" Piece piece - retorna a peca na posicao
+		return pieces[position.getRow()][position.getCollum()];
+	}
 	
 }
