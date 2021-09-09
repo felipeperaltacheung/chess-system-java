@@ -7,6 +7,10 @@ public class Board {
 	private Piece[][] pieces;
 	
 	public Board(int rows, int columns) {
+		if(rows < 1 || columns < 1) { //defensive programming
+			throw new BoardException("Error creating a board: there must be at least 1 row and 1 columns");
+		}
+		
 		this.rows = rows;
 		this.columns = columns;
 		pieces = new Piece[rows][columns];
@@ -16,28 +20,44 @@ public class Board {
 		return rows;
 	}
 
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
-
 	public int getColumns() {
 		return columns;
 	}
-
-	public void setColumns(int columns) {
-		this.columns = columns;
-	}
 	
 	public Piece piece(int row, int column) {
+		if (!positionExists(row, column)){//defensive programming;
+			throw new BoardException("Position not on the board");
+		}
 		return pieces[row][column]; //metodo para retornar a matriz pieces na row e column...
 	}
 	
-	public Piece piece(Position position) {  // perceba a "SOBRECARGA" Piece piece - retorna a peca na posicao
+	public Piece piece(Position position) {  // perceba a "SOBRECARGA" Piece piece - retorna a peca na posicao;
+		if (!positionExists(position)) {//defensive programming;
+			throw new BoardException("Position not on the board");
+		}
 		return pieces[position.getRow()][position.getCollum()];
 	}
 	
 	public void placePiece(Piece piece, Position position){
+		if(thereIsAPiece(position)) { //defensive programming;
+			throw new BoardException("There is already a piece on position" + position);
+		}
 	pieces[position.getRow()][position.getCollum()] = piece;
 	piece.position = position;
+	}
+	
+	public boolean positionExists(int row, int column) {
+		return row >= 0 && row < rows && column >= 0 && column < columns;
+	}
+	
+	public boolean positionExists(Position position) {
+		return positionExists(position.getRow(), position.getCollum());
+	}
+	
+	public boolean thereIsAPiece(Position position) {
+		if (!positionExists(position)) {//defensive programming; antes de testar o thereIsAPiece, ele ja testa se a position existe.
+			throw new BoardException("Position not on the board");
+		}
+		return piece(position) != null;
 	}
 }
