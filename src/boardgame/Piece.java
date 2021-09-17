@@ -16,7 +16,7 @@ public abstract class Piece {
 	public abstract boolean[][] possibleMoves();
 	
 	public boolean possibleMove(Position position) { //um metodo concreto
-		return possibleMoves()[position.getRow()][position.getCollum()]; // um metodo abstrato
+		return possibleMoves()[position.getRow()][position.getColumn()]; // um metodo abstrato
 	} // ou seja um metodo concreto "possibleMove" utilizando um metodo abstrato "possibleMoves" (Hook methods - metodos de gancho)
 	
 	public boolean isThereAnyPossibleMove() {
